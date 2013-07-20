@@ -9,4 +9,4 @@ Methodological Tools
 
 License
 -------
-[MIT License](https://github.com/dwdii/UnfcccCdm-MethTools/blob/master/License.txt)
+[MIT License](https://github.com/dwdii/UnfcccCdm-MethTools/blob/master/LICENSE.txt)
