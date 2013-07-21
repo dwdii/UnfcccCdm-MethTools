@@ -6,50 +6,15 @@ using System.Text;
 namespace CdmMethTools
 {
     /// <summary>
-    /// Tool to determine the mass flow of a greenhouse gas in a gaseous stream
+    /// Tool to determine the mass flow of a greenhouse gas in a gaseous stream Version 2.0.0
     /// </summary>
-    /// <remarks>
+    /// <seealso cref="http://cdm.unfccc.int/methodologies/PAmethodologies/tools/am-tool-08-v2.0.0.pdf/history_view"/>
     public class GaseousStreamMassFlowTool_EB61Annex11v2
     {
         /// <summary>
         /// Universal ideal gases constant (Pa.m3/kmol.K) = 8.314
         /// </summary>
         public const decimal R_u = 8.314m;
-
-        #region Molecular Masses
-        public class MolecularMass
-        {
-            /// <summary>
-            /// Molecular Mass of Water (g/mol) = 18.0152
-            /// </summary>
-            public const decimal H2O = 18.0152m;
-
-            /// <summary>
-            /// Molecular Mass of Methane (g/mol) = 16.04
-            /// </summary>
-            public const decimal CH4 = 16.04m;
-
-            /// <summary>
-            /// Molecular Mass of Carbon Monoxide (g/mol) = 28.01
-            /// </summary>
-            public const decimal CO = 28.01m;
-
-            /// <summary>
-            /// Molecular Mass of Carbon Dioxide (g/mol) = 44.01
-            /// </summary>
-            public const decimal CO2 = 44.01m;
-
-            /// <summary>
-            /// Molecular Mass of Oxygen (g/mol) = 32.00
-            /// </summary>
-            public const decimal O2 = 32.00m;
-
-            /// <summary>
-            /// Molecular Mass of Nitrogen (g/mol) = 28.02
-            /// </summary>
-            public const decimal N2 = 28.02m;
-        }
-        #endregion
 
         /// <summary>
         /// Equation 4 - Calculates the saturation absolute humidity (mH2O,t,db,sat)
