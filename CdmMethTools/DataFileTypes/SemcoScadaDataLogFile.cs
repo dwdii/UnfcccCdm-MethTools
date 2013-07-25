@@ -10,7 +10,21 @@ namespace CdmMethTools
 {
     public class SemcoScadaDataLogFile : IDataLogFile
     {
+        /// <summary>
+        /// DateTime Format of data log timestamp after Date + " " + Time concatentation
+        /// </summary>
         public const string TimeStampFormat = "dd/MM/yyyy HH:mm:ss";
+
+        /// <summary>
+        /// Constants associated with DataLogFileLoadOptions.ExtraData
+        /// </summary>
+        public class ExtraData
+        {
+            /// <summary>
+            /// Key associated with ExtraData entry for the full path to the HDR header file.
+            /// </summary>
+            public const string HdrFile = "HDR";
+        }
 
         /// <summary>
         /// Gets the dictionary of data rows.
@@ -24,11 +38,27 @@ namespace CdmMethTools
         /// <param name="fullPathHdr"></param>
         public void Load(DataLogFileLoadOptions options) 
         {
+            // Local Vars
             TextFieldParser tfp = new TextFieldParser(options.FullPath, Encoding.ASCII, true);
-            string[] values;
-            DateTime timeStamp;
             Dictionary<string, decimal> dataRow;
+            DateTime timeStamp;
+            List<string> headers;
+            string[] values;
 
+            // (Re)Initialize the data rows dictionary
+            if (null == DataRows)
+            {
+                DataRows = new Dictionary<DateTime, Dictionary<string, decimal>>();
+            }
+            else
+            {
+                DataRows.Clear();
+            }
+
+            // Load the headers list
+            headers = LoadHdr(options.ExtraData[ExtraData.HdrFile].ToString());
+
+            // Set our delimiters
             tfp.Delimiters = new string[] { "," };
 
             // Loop through the data rows
@@ -41,10 +71,20 @@ namespace CdmMethTools
                 timeStamp = DateTime.ParseExact(values[0] + " " + values[1], TimeStampFormat, CultureInfo.InvariantCulture);
                 dataRow = new Dictionary<string, decimal>();
 
-                foreach (string value in values)
+                for(int i = 2; i < values.Length; i++)
                 {
-                    //dataRow.Add(
+                    try
+                    {
+                        dataRow.Add(headers[i - 2], Convert.ToDecimal(values[i]));
+                    }
+                    catch (Exception exDR)
+                    {
+                        throw new InvalidDataException(string.Format("An error occured interpreting {0} data. See inner exception for details.", headers[i]), exDR);
+                    }
                 }
+
+                // Add the data row to our dictionary...
+                DataRows.Add(timeStamp, dataRow);
             }
         }
 
