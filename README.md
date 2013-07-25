@@ -10,3 +10,7 @@ Methodological Tools
 License
 -------
 [MIT License](https://github.com/dwdii/UnfcccCdm-MethTools/blob/master/LICENSE.txt)
+
+Development Environment
+-----------------------
+This project solution uses Visual Studio 2010 and .NET Framework v4.
