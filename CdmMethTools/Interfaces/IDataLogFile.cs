@@ -7,6 +7,15 @@ namespace CdmMethTools
 {
     public interface IDataLogFile
     {
+        /// <summary>
+        /// Gets the dictionary of data rows.
+        /// </summary>
+        Dictionary<DateTime, Dictionary<string, decimal>> DataRows { get; }
+
+        /// <summary>
+        /// Load the specified data file according to the specified options
+        /// </summary>
+        /// <param name="options"></param>
         void Load(DataLogFileLoadOptions options);
     }
 
