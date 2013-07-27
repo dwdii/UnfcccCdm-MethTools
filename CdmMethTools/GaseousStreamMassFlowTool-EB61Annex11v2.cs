@@ -106,5 +106,61 @@ namespace CdmMethTools
             // Return
             return v_H2O_t_db;
         }
+
+        /// <summary>
+        /// Calculates the molecular mass of the gaseous stream (MM_t_db).
+        /// </summary>
+        /// <param name="v_ch4_t_db">Volumetric fraction of methane (CH4) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
+        /// <param name="v_co2_t_db">Volumetric fraction of carbon dioxide (CO2) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
+        /// <param name="v_co_t_db">Volumetric fraction of carbon monoxide (CO) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
+        /// <param name="v_o2_t_db">Volumetric fraction of oxygen (O) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
+        /// <param name="v_h2_t_db">Volumetric fraction of hydrogen (H2) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
+        /// <param name="v_n2_t_db">Volumetric fraction of nitrogen (N2) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
+        /// <returns></returns>
+        public decimal Calc_MM_t_db(decimal? v_ch4_t_db, decimal? v_co2_t_db, decimal? v_co_t_db, decimal? v_o2_t_db, decimal? v_h2_t_db, decimal? v_n2_t_db)
+        {
+            // Local Vars
+            decimal MM_t_db = 0;
+
+            // CH4
+            if (v_ch4_t_db.HasValue)
+            {
+                MM_t_db += v_ch4_t_db.Value * MolecularMass.CH4;
+            }
+
+            // CO2
+            if (v_co2_t_db.HasValue)
+            {
+                MM_t_db += v_co2_t_db.Value * MolecularMass.CO2;
+            }
+
+            // CO
+            if (v_co_t_db.HasValue)
+            {
+                MM_t_db += v_co_t_db.Value * MolecularMass.CO;
+            }
+
+            // O2
+            if (v_o2_t_db.HasValue)
+            {
+                MM_t_db += v_o2_t_db.Value * MolecularMass.O2;
+            }
+
+            // H2
+            if (v_h2_t_db.HasValue)
+            {
+                MM_t_db += v_h2_t_db.Value * MolecularMass.H2;
+            }
+
+            // N2
+            if (v_n2_t_db.HasValue)
+            {
+                MM_t_db += v_n2_t_db.Value * MolecularMass.N2;
+            }
+
+            // Return
+            return MM_t_db;
+
+        }
     }
 }
