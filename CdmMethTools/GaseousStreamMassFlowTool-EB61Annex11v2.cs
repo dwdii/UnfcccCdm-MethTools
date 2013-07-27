@@ -17,6 +17,11 @@ namespace CdmMethTools
         public const decimal R_u = 8.314m;
 
         /// <summary>
+        /// Saturation pressure of H2O at 100C in time interval t (Pascals)
+        /// </summary>  
+        public const decimal p_H2O_t_Sat = 101.325m;
+
+        /// <summary>
         /// Equation 4 - Calculates the saturation absolute humidity (mH2O,t,db,sat)
         /// </summary>
         /// <param name="p_H2O_t_Sat">Saturation pressure of H2O at temperature Tt in time interval t (Pa)</param>
@@ -73,7 +78,7 @@ namespace CdmMethTools
         }
 
         /// <summary>
-        /// Equation 7  - Calculates the volumetric flow of he gaseous stream in time interval t on a dry basis (Vt,db)
+        /// Equation 7  - Calculates the volumetric flow of the gaseous stream in time interval t on a dry basis (Vt,db)
         /// </summary>
         /// <param name="V_t_wb">Volumetric flow of the gaseous stream in time interval t on a wet basis (m³ wet gas/h)</param>
         /// <param name="v_H2O_t_db">Volumetric fraction of H2O in the gaseous stream in time interval t on a dry basis (m³ H2O/m³ dry gas)</param>
