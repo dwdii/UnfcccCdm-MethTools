@@ -32,6 +32,33 @@ namespace CdmMethTestTool
 
                 dl.Load(opts);
                 #endregion
+
+                DateTime timeStamp;
+                Dictionary<string, decimal> dataRow;
+                decimal V_t_db;
+                decimal v_H20_t_db;
+                decimal m_H2O_t_db;
+                decimal MM_t_db;
+                decimal ch4Percent;
+
+                foreach(KeyValuePair<DateTime, Dictionary<string, decimal>> dataRowEntry in dl.DataRows)
+                {
+                    timeStamp = dataRowEntry.Key;
+                    dataRow = dataRowEntry.Value;
+
+                    // First calculate the molecular mass of the gaseous stream (using simplified approach).
+                    ch4Percent = dataRow[CH4] / 100;
+                    MM_t_db = t.Calc_MM_t_db(ch4Percent, null, null, null, null, 1 - ch4Percent);
+
+                    //m_H2O_t_db = t.Calc_m_H2O_t_db_Sat(
+
+                    //v_H20_t_db = t.Calc_v_H2O_t_db(m_H2O_t_db, MM_t_db);
+
+                    //V_t_db = t.Calc_V_t_db(dataRow[FL2_Flow], v_H20_t_db);
+                    
+                    //t.Calc_F_i_t();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -45,5 +72,10 @@ namespace CdmMethTestTool
             Console.ReadLine();
             Console.WriteLine("Press ENTER to end...");
         }
+
+        #region Constants
+        private const string FL2_Flow = "FT27[1]";
+        private const string CH4 = "GTY7_CH4[1]";
+        #endregion
     }
 }
