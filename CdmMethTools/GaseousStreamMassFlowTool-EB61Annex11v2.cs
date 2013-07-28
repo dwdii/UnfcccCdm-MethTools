@@ -19,6 +19,7 @@ namespace CdmMethTools
         /// <summary>
         /// Saturation pressure of H2O at 100C in time interval t (Pascals)
         /// </summary>  
+        /// <seealso cref="http://www.engineeringtoolbox.com/water-vapor-saturation-pressure-d_599.html"/>
         public const decimal p_H2O_t_Sat = 101.325m;
 
         /// <summary>
@@ -113,7 +114,7 @@ namespace CdmMethTools
         }
 
         /// <summary>
-        /// Calculates the molecular mass of the gaseous stream (MM_t_db).
+        /// Equation 3: Calculates the molecular mass of the gaseous stream (MM_t_db).
         /// </summary>
         /// <param name="v_ch4_t_db">Volumetric fraction of methane (CH4) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
         /// <param name="v_co2_t_db">Volumetric fraction of carbon dioxide (CO2) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
@@ -121,7 +122,7 @@ namespace CdmMethTools
         /// <param name="v_o2_t_db">Volumetric fraction of oxygen (O) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
         /// <param name="v_h2_t_db">Volumetric fraction of hydrogen (H2) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
         /// <param name="v_n2_t_db">Volumetric fraction of nitrogen (N2) in the gaseious stream in time interval t on a dry basis (m3 gas h/m3 dry gas).</param>
-        /// <returns></returns>
+        /// <returns>Molecular mass of the gaseous stream in time interval t on a dry basis (kg dry gas/kmol dry gas)</returns>
         public decimal Calc_MM_t_db(decimal? v_ch4_t_db, decimal? v_co2_t_db, decimal? v_co_t_db, decimal? v_o2_t_db, decimal? v_h2_t_db, decimal? v_n2_t_db)
         {
             // Local Vars

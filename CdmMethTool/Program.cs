@@ -40,6 +40,11 @@ namespace CdmMethTestTool
                 decimal m_H2O_t_db;
                 decimal MM_t_db;
                 decimal ch4Percent;
+                decimal o2Percent;
+                decimal P_t_fl2;
+                decimal T_t_fl2;
+                decimal rho_i_t;
+                decimal F_i_t_fl2;
 
                 foreach(KeyValuePair<DateTime, Dictionary<string, decimal>> dataRowEntry in dl.DataRows)
                 {
@@ -48,15 +53,29 @@ namespace CdmMethTestTool
 
                     // First calculate the molecular mass of the gaseous stream (using simplified approach).
                     ch4Percent = dataRow[CH4] / 100;
-                    MM_t_db = t.Calc_MM_t_db(ch4Percent, null, null, null, null, 1 - ch4Percent);
+                    o2Percent = dataRow[O2] / 100;
+                    MM_t_db = t.Calc_MM_t_db(ch4Percent, null, null, o2Percent, null, 1 - ch4Percent);
 
-                    //m_H2O_t_db = t.Calc_m_H2O_t_db_Sat(
+                    // This data is in Inches of H2O, so convert to Pascals.
+                    P_t_fl2 = UnitConvert.InchesH2OToPascals(dataRow[FL2_Pressure]);
 
-                    //v_H20_t_db = t.Calc_v_H2O_t_db(m_H2O_t_db, MM_t_db);
+                    // Calc saturation absolution humidity
+                    //
+                    // Using p_H2O_t_Sat const of 101.325 at 100C, but really we should calc from gas temp.
+                    m_H2O_t_db = t.Calc_m_H2O_t_db_Sat(GaseousStreamMassFlowTool_EB61Annex11v2.p_H2O_t_Sat, P_t_fl2, MM_t_db);
 
-                    //V_t_db = t.Calc_V_t_db(dataRow[FL2_Flow], v_H20_t_db);
+                    // Calc volumetric fraction of H2O
+                    v_H20_t_db = t.Calc_v_H2O_t_db(m_H2O_t_db, MM_t_db);
+
+                    // Calc volumetric flow 
+                    V_t_db = t.Calc_V_t_db(dataRow[FL2_Flow], v_H20_t_db);
+
+                    // Calc density of CH4
+                    T_t_fl2 = UnitConvert.CelsiusToKelvin(dataRow[FL2_GasTemp]);
+                    rho_i_t = t.Calc_Rho_i_t(P_t_fl2, MolecularMass.CH4, T_t_fl2);
                     
-                    //t.Calc_F_i_t();
+                    // Mass flow
+                    F_i_t_fl2 = t.Calc_F_i_t(V_t_db, ch4Percent, rho_i_t);
                 }
                 
             }
@@ -75,7 +94,12 @@ namespace CdmMethTestTool
 
         #region Constants
         private const string FL2_Flow = "FT27[1]";
+        private const string FL2_Pressure = "PT27[1]";
+        private const string FL2_GasTemp = "TT27[1]";
+        private const string FL2_FlareTemp = "TT26[1]";
+
         private const string CH4 = "GTY7_CH4[1]";
+        private const string O2 = "GTY7_O2_2[1]";
         #endregion
     }
 }
