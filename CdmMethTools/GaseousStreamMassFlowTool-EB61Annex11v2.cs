@@ -20,7 +20,7 @@ namespace CdmMethTools
         /// Saturation pressure of H2O at 100C in time interval t (Pascals)
         /// </summary>  
         /// <seealso cref="http://www.engineeringtoolbox.com/water-vapor-saturation-pressure-d_599.html"/>
-        public const decimal p_H2O_t_Sat = 101.325m;
+        public const decimal p_H2O_t_Sat = 101325m;
 
         /// <summary>
         /// Equation 4 - Calculates the saturation absolute humidity (mH2O,t,db,sat)
