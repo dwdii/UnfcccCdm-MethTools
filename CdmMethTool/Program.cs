@@ -45,6 +45,7 @@ namespace CdmMethTestTool
                 decimal T_t_fl2;
                 decimal rho_i_t;
                 decimal F_i_t_fl2;
+                decimal p_H2O_t_Sat; 
 
                 foreach(KeyValuePair<DateTime, Dictionary<string, decimal>> dataRowEntry in dl.DataRows)
                 {
@@ -56,13 +57,16 @@ namespace CdmMethTestTool
                     o2Percent = dataRow[O2] / 100;
                     MM_t_db = t.Calc_MM_t_db(ch4Percent, null, null, o2Percent, null, 1 - ch4Percent);
 
-                    // This data is in Inches of H2O, so convert to Pascals.
+                    // This data is in Inches of H2O, so convert to Pascals and get gas temp also.
                     P_t_fl2 = UnitConvert.InchesH2OToPascals(dataRow[FL2_Pressure]);
+                    T_t_fl2 = UnitConvert.CelsiusToKelvin(dataRow[FL2_GasTemp]);
+
+                    // Calc saturation pressure at actual gas temp;
+                    p_H2O_t_Sat = MiscEquations.SaturationPressurePaOfH2O(dataRow[FL2_GasTemp]);
 
                     // Calc saturation absolution humidity
                     //
-                    // Using p_H2O_t_Sat const of 101.325 at 100C, but really we should calc from gas temp.
-                    m_H2O_t_db = t.Calc_m_H2O_t_db_Sat(GaseousStreamMassFlowTool_EB61Annex11v2.p_H2O_t_Sat, P_t_fl2, MM_t_db);
+                    m_H2O_t_db = t.Calc_m_H2O_t_db_Sat(p_H2O_t_Sat, P_t_fl2, MM_t_db);
 
                     // Calc volumetric fraction of H2O
                     v_H20_t_db = t.Calc_v_H2O_t_db(m_H2O_t_db, MM_t_db);
@@ -71,7 +75,6 @@ namespace CdmMethTestTool
                     V_t_db = t.Calc_V_t_db(dataRow[FL2_Flow], v_H20_t_db);
 
                     // Calc density of CH4
-                    T_t_fl2 = UnitConvert.CelsiusToKelvin(dataRow[FL2_GasTemp]);
                     rho_i_t = t.Calc_Rho_i_t(P_t_fl2, MolecularMass.CH4, T_t_fl2);
                     
                     // Mass flow
