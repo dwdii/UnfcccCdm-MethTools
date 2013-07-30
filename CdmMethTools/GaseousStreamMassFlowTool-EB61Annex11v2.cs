@@ -25,7 +25,7 @@ namespace CdmMethTools
         /// <summary>
         /// Equation 4 - Calculates the saturation absolute humidity (mH2O,t,db,sat)
         /// </summary>
-        /// <param name="p_H2O_t_Sat">Saturation pressure of H2O at temperature Tt in time interval t (Pa)</param>
+        /// <param name="p_H2O_t_Sat">Saturation pressure of H2O at temperature T_t in time interval t (Pa)</param>
         /// <param name="P_t">Absolute pressure of the gaseous stream in time interval t (Pa)</param>
         /// <param name="MM_t_db">Molecular mass of the gaseous stream in a time interval t on a dry basis (kg dry gas/kmol dry gas)</param>
         /// <returns>Saturation absolute humidity in time interval t on a dry basis (kg H2O/kg dry gas)</returns>

@@ -7,7 +7,7 @@ namespace CdmMethTools
 {
     public class UnitConvert
     {
-        public const decimal PascalsPerInchH20 = 249.088908333m;
+        public const decimal PascalsPerInchH20 = 249.08890833319208m;
 
         public const decimal KelvinFromCelsiusAdditive = 273.15m;
 
