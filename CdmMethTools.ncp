@@ -1,0 +1,44 @@
+<Project>
+  <Name>CdmMethTools</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>API</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>GaseousStreamMassFlowTool_EB61Annex11v2</Name>
+        <Access>Public</Access>
+        <Location left="101" top="59" />
+        <Size width="478" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public const decimal R_u = 8.314m</Member>
+        <Member type="Field">public const decimal p_H2O_t_Sat = 101325m</Member>
+        <Member type="Method">public decimal Calc_m_H2O_t_db_Sat(decimal p_H2O_t_Sat, decimal P_t, decimal MM_t_db)</Member>
+        <Member type="Method">public void Calc_F_i_t()</Member>
+        <Member type="Method">public void Calc_Rho_i_t()</Member>
+        <Member type="Method">public decimal Calc_V_t_db()</Member>
+        <Member type="Method">public decimal Calc_v_H2O_t_db()</Member>
+        <Member type="Method">public decimal Calc_MM_t_db()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>MolecularMass</Name>
+        <Access>Public</Access>
+        <Location left="101" top="307" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public const decimal H2O = 18.0152m</Member>
+        <Member type="Field">public const decimal CH4 = 16.04m</Member>
+        <Member type="Field">public const decimal CO = 28.01m</Member>
+        <Member type="Field">public const decimal CO2 = 44.01m</Member>
+        <Member type="Field">public const decimal O2 = 32.00m</Member>
+        <Member type="Field">public const decimal N2 = 28.02m</Member>
+        <Member type="Field">public const decimal H2 = 2.02m</Member>
+        <Member type="Field">public const decimal NO = 30.01m</Member>
+        <Member type="Field">public const decimal NO2 = 46.01m</Member>
+        <Member type="Field">public const decimal SO2 = 64.06m</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+</Project>
