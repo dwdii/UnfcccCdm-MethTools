@@ -23,6 +23,43 @@ namespace CdmMethTools
         public const decimal p_H2O_t_Sat = 101325m;
 
         /// <summary>
+        /// Equation 1: Calculate absolute humidity of the gaseous stream (mH2O,t,db) from measurements of the moisture content of the gas
+        /// </summary>
+        /// <param name="C_H2O_t_db_n">Moisture content of the gaseous stream in time interval t on a dry basis at normal conditions (mg H2O/m3 dry gas)</param>
+        /// <param name="rho_t_db_n">Density of the gaseous stream in time interval t on a dry basis at normal conditions (kg dry gas/m3 dry gas)</param>
+        /// <returns>Absolute humidity of the gaseous stream in time interval t on a dry basis (kg H2O/kg dry gas)</returns>
+        public decimal Calc_m_H2O_t_db(decimal C_H2O_t_db_n, decimal rho_t_db_n)
+        {
+            // Local Vars
+            decimal m_H2O_t_db = 0;
+
+            // Calc
+            m_H2O_t_db = C_H2O_t_db_n / (Convert.ToDecimal(Math.Pow(10,6)) * rho_t_db_n);
+
+            // Return
+            return m_H2O_t_db;
+        }
+
+        /// <summary>
+        /// Equation 2: Density of the gaseous stream on a dry basis at normal conditions (ρt,db,n)
+        /// </summary>
+        /// <param name="P_n">Absolute pressure at normal conditions (Pa)</param>
+        /// <param name="MM_t_db">Molecular mass of the gaseous stream in a time interval t on a dry basis (kg dry gas/kmol dry gas)</param>
+        /// <param name="T_n">Temperature at normal conditions (K)</param>
+        /// <returns>Density of the gaseous stream in time interval t on a dry basis at normal conditions (kg dry gas/m3 dry gas)</returns>
+        public decimal Calc_Rho_t_db_n(decimal P_n, decimal MM_t_db, decimal T_n)
+        {
+            // Local Vars
+            decimal rho_t_db_n = 0;
+
+            // Calc
+            rho_t_db_n = (P_n * MM_t_db) / (R_u * T_n);
+
+            // Return
+            return rho_t_db_n;
+        }
+
+        /// <summary>
         /// Equation 4 - Calculates the saturation absolute humidity (mH2O,t,db,sat)
         /// </summary>
         /// <param name="p_H2O_t_Sat">Saturation pressure of H2O at temperature T_t in time interval t (Pa)</param>
