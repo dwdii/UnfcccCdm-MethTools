@@ -205,5 +205,26 @@ namespace CdmMethTools
             return MM_t_db;
 
         }
+
+        /// <summary>
+        /// Equation 11: Convert the volumetric flow of the gaseous stream from actual conditions to normal conditions of temperature and pressure
+        /// </summary>
+        /// <param name="V_t_wb">Volumetric flow of the gaseous stream in time interval t on a wet basis (m³ wet gas/h)</param>
+        /// <param name="T_n">Temperature at normal conditions (K)</param>
+        /// <param name="T_t">Temperature of the gaseous stream in time interval t (K)</param>
+        /// <param name="P_n">Absolute pressure at normal conditions (Pa)</param>
+        /// <param name="P_t">Pressure of the gaseous stream in time interval t (Pa)</param>
+        /// <returns>Volumetric flow of the gaseous stream in a time interval t on a wet basis at normal conditions (m3 wet gas/h)</returns>
+        public decimal Calc_V_t_wb_n(decimal V_t_wb, decimal T_n, decimal T_t, decimal P_n, decimal P_t)
+        {
+            // Local Vars
+            decimal V_t_wb_n = 0;
+
+            // Calc
+            V_t_wb_n = V_t_wb * ((T_n / T_t) * (P_n / P_t));
+
+            // Return
+            return V_t_wb_n;
+        }
     }
 }
