@@ -45,6 +45,7 @@
     <Compile Include="Interfaces\IDataLogFile.cs" />
     <Compile Include="MiscEquations.cs" />
     <Compile Include="MolecularMass.cs" />
+    <Compile Include="ProjectEmissionsFromFlaringTool-EB68Annex15v2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataFileTypes\SemcoScadaDataLogFile.cs" />
     <Compile Include="UnitConverter.cs" />
