@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using CdmMethTools;
+using CdmMethTools.Interfaces;
 
 namespace CdmMethTestTool
 {

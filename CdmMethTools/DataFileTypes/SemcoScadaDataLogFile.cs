@@ -6,9 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+
 namespace CdmMethTools
 {
-    public class SemcoScadaDataLogFile : IDataLogFile
+    public class SemcoScadaDataLogFile : Interfaces.IDataLogFile
     {
         /// <summary>
         /// DateTime Format of data log timestamp after Date + " " + Time concatentation
@@ -36,7 +37,7 @@ namespace CdmMethTools
         /// </summary>
         /// <param name="fullPathCsv"></param>
         /// <param name="fullPathHdr"></param>
-        public void Load(DataLogFileLoadOptions options) 
+        public void Load(Interfaces.DataLogFileLoadOptions options) 
         {
             // Local Vars
             TextFieldParser tfp = new TextFieldParser(options.FullPath, Encoding.ASCII, true);

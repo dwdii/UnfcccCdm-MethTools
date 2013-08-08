@@ -9,7 +9,7 @@ namespace CdmMethTools
     /// Tool to determine the mass flow of a greenhouse gas in a gaseous stream Version 2.0.0
     /// </summary>
     /// <seealso cref="http://cdm.unfccc.int/methodologies/PAmethodologies/tools/am-tool-08-v2.0.0.pdf/history_view"/>
-    public class GaseousStreamMassFlowTool_EB61Annex11v2
+    public class GaseousStreamMassFlowTool_EB61Annex11v2 : Interfaces.IMethodologyTool
     {
         /// <summary>
         /// Universal ideal gases constant (Pa.m3/kmol.K) = 8.314
@@ -21,6 +21,20 @@ namespace CdmMethTools
         /// </summary>  
         /// <seealso cref="http://www.engineeringtoolbox.com/water-vapor-saturation-pressure-d_599.html"/>
         public const decimal p_H2O_t_Sat = 101325m;
+
+        #region IMethodologyTool interface
+
+        public string Name
+        {
+            get { return "Tool to determine the mass flow of a greenhouse gas in a gaseous stream Version 2.0.0"; }
+        }
+
+        public Uri MoreInfoLink
+        {
+            get { return new Uri("http://cdm.unfccc.int/methodologies/PAmethodologies/tools/am-tool-08-v2.0.0.pdf/history_view"); }
+        }
+
+        #endregion
 
         /// <summary>
         /// Equation 1: Calculate absolute humidity of the gaseous stream (mH2O,t,db) from measurements of the moisture content of the gas

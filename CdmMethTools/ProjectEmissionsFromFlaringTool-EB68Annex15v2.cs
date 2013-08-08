@@ -9,7 +9,7 @@ namespace CdmMethTools
     /// Methodological tool “Project emissions from flaring” Version 2.0.0 - EB68 Annex 15
     /// </summary>
     /// <seealso cref="http://cdm.unfccc.int/methodologies/PAmethodologies/tools/am-tool-06-v2.0.pdf/history_view"/>
-    public class ProjectEmissionsFromFlaringTool_EB68Annex15v2
+    public class ProjectEmissionsFromFlaringTool_EB68Annex15v2 : Interfaces.IMethodologyTool
     {
         public class FlareEffMassFlow
         {
@@ -23,6 +23,20 @@ namespace CdmMethTools
             /// </summary>
             public decimal F_CH4_RG_t = 0;
         }
+
+        #region IMethodologyTool interface
+
+        public string Name
+        {
+            get { return "Methodological tool \"Project emissions from flaring\" Version 2.0.0"; }
+        }
+
+        public Uri MoreInfoLink
+        {
+            get { return new Uri("http://cdm.unfccc.int/methodologies/PAmethodologies/tools/am-tool-06-v2.0.pdf/history_view"); }
+        }
+
+        #endregion
 
         /// <summary>
         /// Equation 1: Calculates flare efficiency made in year y (ηflare,calc,y) from biannual measurement of the flare efficiency
