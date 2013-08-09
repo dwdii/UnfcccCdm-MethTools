@@ -11,6 +11,9 @@ namespace CdmMethTools
     /// <seealso cref="http://cdm.unfccc.int/methodologies/PAmethodologies/tools/am-tool-06-v2.0.pdf/history_view"/>
     public class ProjectEmissionsFromFlaringTool_EB68Annex15v2 : Interfaces.IMethodologyTool
     {
+        /// <summary>
+        /// Helper class for encapsulating a flare efficiency measurement
+        /// </summary>
         public class FlareEffMassFlow
         {
             /// <summary>
@@ -22,6 +25,22 @@ namespace CdmMethTools
             /// Mass flow of methane in the residual gas on a dry basis at reference conditions in the time period t (kg)
             /// </summary>
             public decimal F_CH4_RG_t = 0;
+        }
+
+        /// <summary>
+        /// Reference conditions are defined as 0oC (273.15 K, 32ºF) and 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
+        /// </summary>
+        public struct ReferenceConditions
+        {
+            /// <summary>
+            /// 0C (273.15 K, 32ºF)
+            /// </summary>
+            public const decimal TemperatureC = 0;
+
+            /// <summary>
+            /// 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
+            /// </summary>
+            public const decimal PressureAtm = 1;
         }
 
         #region IMethodologyTool interface
@@ -39,7 +58,7 @@ namespace CdmMethTools
         #endregion
 
         /// <summary>
-        /// Equation 1: Calculates flare efficiency made in year y (ηflare,calc,y) from biannual measurement of the flare efficiency
+        /// Equation 1: Option B.1: Calculates flare efficiency made in year y (ηflare,calc,y) from biannual measurement of the flare efficiency
         /// </summary>
         /// <param name="flareEffMeasure1">The first flare efficiency measurement</param>
         /// <param name="flareEffMeasure2">The second flare efficiency measurement</param>
@@ -75,6 +94,23 @@ namespace CdmMethTools
 
             // Return
             return Eta_flare_calc_y;
+        }
+
+        /// <summary>
+        /// Equation 2: Option B.2: Measurement of flare efficiency in each minute
+        /// </summary>
+        /// <param name="flareEffMeasure">The mass flow of methane in the residual gas and exhaust gas of the flare on a dry basis at reference conditions in the minute m (kg)</param>
+        /// <returns>Flare efficiency in the minute m</returns>
+        public decimal Calc_Eta_flare_calc_m(FlareEffMassFlow flareEffMeasure)
+        {
+            // Local Vars
+            decimal Eta_flare_calc_m = 0;
+
+            // Calc
+            Eta_flare_calc_m = 1 - (flareEffMeasure.F_CH4_EG_t / flareEffMeasure.F_CH4_RG_t);
+
+            // Return
+            return Eta_flare_calc_m;
         }
     }
 }
