@@ -112,5 +112,23 @@ namespace CdmMethTools
             // Return
             return Eta_flare_calc_m;
         }
+
+        /// <summary>
+        /// Equation 3: Step 2.1: Determine the methane mass flow in the exhaust gas on a dry basis
+        /// </summary>
+        /// <param name="V_EG_m">Volumetric flow of the exhaust gas of the flare on a dry basis at reference conditions in minute m (m3)</param>
+        /// <param name="fc_CH4_EG_m">Concentration of methane in the exhaust gas of the flare on a dry basis at reference conditions in minute m (mg/m3)</param>
+        /// <returns>Mass flow of methane in the exhaust gas of the flare on a dry basis at reference conditions in the minute m (kg)</returns>
+        public decimal Calc_F_CH4_EG_m(decimal V_EG_m, decimal fc_CH4_EG_m)
+        {
+            // Local Vars
+            decimal F_CH4_EG_m = 0;
+
+            // Calc
+            F_CH4_EG_m = V_EG_m * fc_CH4_EG_m * Convert.ToDecimal(Math.Pow(10, -6));
+
+            // Return
+            return F_CH4_EG_m;
+        }
     }
 }
