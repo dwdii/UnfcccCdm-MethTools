@@ -8,8 +8,8 @@
     <ProjectGuid>{04CCC60D-6B6D-41F1-8AEE-46CA25D7DFD5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CdmMethTestTool</RootNamespace>
-    <AssemblyName>CdmMethTestTool</AssemblyName>
+    <RootNamespace>CdmMethTool</RootNamespace>
+    <AssemblyName>CdmMethTool</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

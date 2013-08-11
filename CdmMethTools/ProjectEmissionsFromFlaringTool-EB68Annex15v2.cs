@@ -89,7 +89,7 @@ namespace CdmMethTools
                 sumOfRatios += flareEffMeasure.F_CH4_EG_t / flareEffMeasure.F_CH4_RG_t;
             }
 
-            // Calc
+            // Equation 1
             Eta_flare_calc_y = 1 - ((1 / 2) * sumOfRatios);
 
             // Return
@@ -106,7 +106,7 @@ namespace CdmMethTools
             // Local Vars
             decimal Eta_flare_calc_m = 0;
 
-            // Calc
+            // Equation 2
             Eta_flare_calc_m = 1 - (flareEffMeasure.F_CH4_EG_t / flareEffMeasure.F_CH4_RG_t);
 
             // Return
@@ -124,11 +124,29 @@ namespace CdmMethTools
             // Local Vars
             decimal F_CH4_EG_m = 0;
 
-            // Calc
+            // Equation 3
             F_CH4_EG_m = V_EG_m * fc_CH4_EG_m * Convert.ToDecimal(Math.Pow(10, -6));
 
             // Return
             return F_CH4_EG_m;
+        }
+
+        /// <summary>
+        /// Equation 4: Step 2.2: Determine the volumetric flow of the exhaust gas (VEG,m)
+        /// </summary>
+        /// <param name="Q_EG_m">Volume of the exhaust gas on a dry basis at reference conditions per kilogram of residual gas on a dry basis at reference conditions in minute m (m3 exhaust gas/kg residual gas)</param>
+        /// <param name="M_RG_m">Mass flow of the residual gas on a dry basis at reference conditions in the minute m (kg)</param>
+        /// <returns>Volumetric flow of the exhaust gas on a dry basis at reference conditions in minute m (m3)</returns>
+        public decimal Calc_V_EG_m(decimal Q_EG_m, decimal M_RG_m)
+        {
+            // Local Vars
+            decimal V_EG_m = 0;
+
+            // Equation 4
+            V_EG_m = Q_EG_m * M_RG_m;
+
+            // Return
+            return V_EG_m;
         }
     }
 }

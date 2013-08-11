@@ -6,7 +6,7 @@ using System.Text;
 using CdmMethTools;
 using CdmMethTools.Interfaces;
 
-namespace CdmMethTestTool
+namespace CdmMethTool
 {
     class Program
     {

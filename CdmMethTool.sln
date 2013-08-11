@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CdmMethTestTool", "CdmMethTool\CdmMethTestTool.csproj", "{04CCC60D-6B6D-41F1-8AEE-46CA25D7DFD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CdmMethTool", "CdmMethTool\CdmMethTool.csproj", "{04CCC60D-6B6D-41F1-8AEE-46CA25D7DFD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CdmMethTools", "CdmMethTools\CdmMethTools.csproj", "{1213082D-C724-4252-81E7-47A3CA678285}"
 EndProject
