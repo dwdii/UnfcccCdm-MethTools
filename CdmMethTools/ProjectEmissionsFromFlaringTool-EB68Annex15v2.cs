@@ -132,7 +132,7 @@ namespace CdmMethTools
         }
 
         /// <summary>
-        /// Equation 4: Step 2.2: Determine the volumetric flow of the exhaust gas (VEG,m)
+        /// Equation 4: Step 2.2: Determine the volumetric flow of the exhaust gas (V_EG,m)
         /// </summary>
         /// <param name="Q_EG_m">Volume of the exhaust gas on a dry basis at reference conditions per kilogram of residual gas on a dry basis at reference conditions in minute m (m3 exhaust gas/kg residual gas)</param>
         /// <param name="M_RG_m">Mass flow of the residual gas on a dry basis at reference conditions in the minute m (kg)</param>
@@ -148,5 +148,24 @@ namespace CdmMethTools
             // Return
             return V_EG_m;
         }
+
+        /// <summary>
+        /// Equation 5: Step 2.3: Determine the mass flow of the residual gas (M_RG,m)
+        /// </summary>
+        /// <param name="Rho_RG_ref_m">Density of the residual gas at reference conditions in minute m (kg/m3)</param>
+        /// <param name="V_RG_m">Volumetric flow of the residual gas on a dry basis at reference conditions in the minute m (m3)</param>
+        /// <returns>Mass flow of the residual gas on a dry basis at reference conditions in minute m (kg)</returns>
+        public decimal Calc_M_RG_m(decimal Rho_RG_ref_m, decimal V_RG_m)
+        {
+            // Local Vars
+            decimal M_RG_m = 0;
+
+            // Equation 5
+            M_RG_m = Rho_RG_ref_m * V_RG_m;
+
+            // Return
+            return M_RG_m;
+        }
+
     }
 }
