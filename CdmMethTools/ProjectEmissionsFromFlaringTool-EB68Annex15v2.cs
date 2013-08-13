@@ -28,6 +28,11 @@ namespace CdmMethTools
         }
 
         /// <summary>
+        /// Universal ideal gas constant (Pa.m3/kmol.K) = 0.008314472
+        /// </summary>
+        public const decimal Ru = 0.008314472m;
+
+        /// <summary>
         /// Reference conditions are defined as 0oC (273.15 K, 32ºF) and 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
         /// </summary>
         public struct ReferenceConditions
@@ -38,9 +43,19 @@ namespace CdmMethTools
             public const decimal TemperatureC = 0;
 
             /// <summary>
+            /// 273.15 Kelvin
+            /// </summary>
+            public const decimal TemperatureK = 273.15m;
+
+            /// <summary>
             /// 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
             /// </summary>
             public const decimal PressureAtm = 1;
+
+            /// <summary>
+            /// 101,315 Pa
+            /// </summary>
+            public const decimal PressurePa = 101325;
         }
 
         #region IMethodologyTool interface
@@ -165,6 +180,23 @@ namespace CdmMethTools
 
             // Return
             return M_RG_m;
+        }
+
+        /// <summary>
+        /// Equation 6: Calculate the density of the residual gas at reference conditions in minute m (kg/m3)
+        /// </summary>
+        /// <param name="MM_RG_m">Molecular mass of the residual gas in minute m (kg/kmol)s</param>
+        /// <returns>Density of the residual gas at reference conditions in minute m (kg/m3)</returns>
+        public decimal Calc_Rho_RG_ref_m(decimal MM_RG_m)
+        {
+            // Local Vars
+            decimal Rho_RG_ref_m = 0;
+
+            // Equation 6
+            Rho_RG_ref_m = ReferenceConditions.PressurePa / ( (Ru / MM_RG_m) * ReferenceConditions.TemperatureK);
+
+            // Return
+            return Rho_RG_ref_m;
         }
 
     }
