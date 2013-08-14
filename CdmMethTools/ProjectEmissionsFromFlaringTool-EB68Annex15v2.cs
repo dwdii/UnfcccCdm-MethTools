@@ -199,5 +199,23 @@ namespace CdmMethTools
             return Rho_RG_ref_m;
         }
 
+        /// <summary>
+        /// Equation 8: Calculate the volume of the exhaust gas on a dry basis per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)
+        /// </summary>
+        /// <param name="Q_CO2_EG_m">Quantity of CO2 volume in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)</param>
+        /// <param name="Q_O2_EG_m">Quantity of O2 volume in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)</param>
+        /// <param name="Q_N2_EG_m">Quantity of N2 volume in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)</param>
+        /// <returns>Volume of the exhaust gas on a dry basis per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)</returns>
+        public decimal Calc_Q_EG_m(decimal Q_CO2_EG_m, decimal Q_O2_EG_m, decimal Q_N2_EG_m)
+        {
+            // Local Vars
+            decimal Q_EG_m = 0;
+
+            // Equation 8
+            Q_EG_m = Q_CO2_EG_m + Q_O2_EG_m + Q_N2_EG_m;
+
+            // Return
+            return Q_EG_m;
+        }
     }
 }
