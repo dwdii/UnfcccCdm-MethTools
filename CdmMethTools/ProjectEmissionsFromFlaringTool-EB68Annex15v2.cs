@@ -33,6 +33,11 @@ namespace CdmMethTools
         public const decimal Ru = 0.008314472m;
 
         /// <summary>
+        /// Volume of one mole of any ideal gas at reference temperature and pressure
+        /// </summary>
+        public const decimal VM_ref = 22.4m;
+
+        /// <summary>
         /// Reference conditions are defined as 0oC (273.15 K, 32ºF) and 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
         /// </summary>
         public struct ReferenceConditions
@@ -216,6 +221,23 @@ namespace CdmMethTools
 
             // Return
             return Q_EG_m;
+        }
+
+        /// <summary>
+        /// Equation 9: Calculates the quantity of O2 volume in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)
+        /// </summary>
+        /// <param name="n_O2_EG_m">Quantity of O2 (moles) in the exhaust gas per kg of residual gas flared on a dry basis at reference conditions in minute m (kmol/kg residual gas)</param>
+        /// <returns>Quantity of O2 volume in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)</returns>
+        public decimal Calc_Q_O2_EG_m(decimal n_O2_EG_m)
+        {
+            // Local Vars
+            decimal Q_O2_EG_m = 0;
+
+            // Equation 9
+            Q_O2_EG_m = n_O2_EG_m * VM_ref;
+
+            // Return
+            return Q_O2_EG_m;
         }
     }
 }
