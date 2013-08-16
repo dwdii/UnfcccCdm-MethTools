@@ -9,7 +9,7 @@ namespace CdmMethTools
     /// Molecular Masses various gases
     /// </summary>
     /// <seealso cref="http://cdm.unfccc.int/methodologies/PAmethodologies/tools/am-tool-08-v2.0.0.pdf/history_view"/>
-    public class MolecularMass
+    public struct MolecularMass
     {
         /// <summary>
         /// Molecular Mass of Water (g/mol) = 18.0152

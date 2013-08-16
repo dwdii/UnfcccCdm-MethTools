@@ -28,39 +28,51 @@ namespace CdmMethTools
         }
 
         /// <summary>
-        /// Universal ideal gas constant (Pa.m3/kmol.K) = 0.008314472
+        /// Table 1: Constants used in equations
         /// </summary>
-        public const decimal Ru = 0.008314472m;
-
-        /// <summary>
-        /// Volume of one mole of any ideal gas at reference temperature and pressure
-        /// </summary>
-        public const decimal VM_ref = 22.4m;
-
-        /// <summary>
-        /// Reference conditions are defined as 0oC (273.15 K, 32ºF) and 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
-        /// </summary>
-        public struct ReferenceConditions
+        /// <seealso cref="CdmMethTools.AtomicMass"/>
+        public struct Constants
         {
             /// <summary>
-            /// 0C (273.15 K, 32ºF)
+            /// Universal ideal gas constant (Pa.m3/kmol.K) = 0.008314472
             /// </summary>
-            public const decimal TemperatureC = 0;
+            public const decimal Ru = 0.008314472m;
 
             /// <summary>
-            /// 273.15 Kelvin
+            /// Volume of one mole of any ideal gas at reference temperature and pressure
             /// </summary>
-            public const decimal TemperatureK = 273.15m;
+            public const decimal VM_ref = 22.4m;
 
             /// <summary>
-            /// 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
+            /// O2 volumetric fraction of air (Dimensionless)
             /// </summary>
-            public const decimal PressureAtm = 1;
+            public const decimal v_O2_air = 0.21m;
 
             /// <summary>
-            /// 101,315 Pa
+            /// Reference conditions are defined as 0oC (273.15 K, 32ºF) and 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
             /// </summary>
-            public const decimal PressurePa = 101325;
+            public struct ReferenceConditions
+            {
+                /// <summary>
+                /// 0C (273.15 K, 32ºF)
+                /// </summary>
+                public const decimal TemperatureC = 0;
+
+                /// <summary>
+                /// 273.15 Kelvin
+                /// </summary>
+                public const decimal TemperatureK = 273.15m;
+
+                /// <summary>
+                /// 1 atm (101.325 kN/m2, 101.325 kPa, 14.69 psia, 29.92 in Hg, 760 torr).
+                /// </summary>
+                public const decimal PressureAtm = 1;
+
+                /// <summary>
+                /// 101,315 Pa
+                /// </summary>
+                public const decimal PressurePa = 101325;
+            }
         }
 
         #region IMethodologyTool interface
@@ -198,7 +210,7 @@ namespace CdmMethTools
             decimal Rho_RG_ref_m = 0;
 
             // Equation 6
-            Rho_RG_ref_m = ReferenceConditions.PressurePa / ( (Ru / MM_RG_m) * ReferenceConditions.TemperatureK);
+            Rho_RG_ref_m = Constants.ReferenceConditions.PressurePa / ( (Constants.Ru / MM_RG_m) * Constants.ReferenceConditions.TemperatureK);
 
             // Return
             return Rho_RG_ref_m;
@@ -234,10 +246,30 @@ namespace CdmMethTools
             decimal Q_O2_EG_m = 0;
 
             // Equation 9
-            Q_O2_EG_m = n_O2_EG_m * VM_ref;
+            Q_O2_EG_m = n_O2_EG_m * Constants.VM_ref;
 
             // Return
             return Q_O2_EG_m;
+        }
+
+        /// <summary>
+        /// Equation 10: Calculates the quantity of N2 (volume) in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)
+        /// </summary>
+        /// <param name="MF_N_RG_m">Mass fraction of nitrogen in the residual gas in the minute m</param>
+        /// <param name="v_O2_air">Volumetric fraction of O2 in air</param>
+        /// <param name="F_O2_RG_m">Stochiometric quantity of moles of O2 required for a complete oxidation of one kg residual gas in minute m (kmol/kg residual gas)</param>
+        /// <param name="n_O2_EG_m">Quantity of O2 (moles) in the exhaust gas per kg of residual gas flared on a dry basis at reference conditions in minute m (kmol/kg residual gas)</param>
+        /// <returns>Quantity of N2 (volume) in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)</returns>
+        public decimal Calc_Q_N2_EG_m(decimal MF_N_RG_m, decimal v_O2_air, decimal F_O2_RG_m, decimal n_O2_EG_m)
+        {
+            // Local Vars
+            decimal Q_N2_EG_m = 0;
+
+            // Equation 10
+            Q_N2_EG_m = Constants.VM_ref * ( (MF_N_RG_m / (2 * AtomicMass.N)) + ((1 - Constants.v_O2_air) / Constants.v_O2_air) * (F_O2_RG_m + n_O2_EG_m) );
+
+            // Return
+            return Q_N2_EG_m;
         }
     }
 }
