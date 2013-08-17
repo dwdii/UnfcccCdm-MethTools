@@ -271,5 +271,22 @@ namespace CdmMethTools
             // Return
             return Q_N2_EG_m;
         }
+
+        /// <summary>
+        /// Equation 11: Calculates the quantity of CO2 volume in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)
+        /// </summary>
+        /// <param name="MF_C_RG_m">Mass fraction of carbon in the residual gas in the minute m</param>
+        /// <returns>Quantity of CO2 volume in the exhaust gas per kg of residual gas on a dry basis at reference conditions in the minute m (m3/kg residual gas)</returns>
+        public decimal Calc_Q_CO2_EG_m(decimal MF_C_RG_m)
+        {
+            // Local Vars
+            decimal Q_CO2_EG_m = 0;
+
+            // Equation 11
+            Q_CO2_EG_m = (MF_C_RG_m / AtomicMass.C) * Constants.VM_ref;
+
+            // Return
+            return Q_CO2_EG_m;
+        }
     }
 }
