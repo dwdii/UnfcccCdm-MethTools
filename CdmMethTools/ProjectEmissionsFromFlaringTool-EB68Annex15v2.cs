@@ -288,5 +288,26 @@ namespace CdmMethTools
             // Return
             return Q_CO2_EG_m;
         }
+
+        /// <summary>
+        /// Equation 12: Calculates the quantity of O2 (moles) in the exhaust gas per kg of residual gas flared on a dry basis at reference conditions in minute m (kmol/kg residual gas)
+        /// </summary>
+        /// <param name="v_O2_EG_m">Volumetric fraction of O2 in the exhaust gas on a dry basis at reference conditions in the minute m</param>
+        /// <param name="MF_C_RG_m">Mass fraction of carbon in the residual gas in the minute m</param>
+        /// <param name="MF_N_RG_m">Mass fraction of nitrogen in the residual gas in the minute m</param>
+        /// <param name="F_O2_RG_m">Stochiometric quantity of moles of O2 required for a complete oxidation of one kg residual gas in minute m (kmol/kg residual gas)</param>
+        /// <returns>Quantity of O2 (moles) in the exhaust gas per kg of residual gas flared on a dry basis at reference conditions in minute m (kmol/kg residual gas)</returns>
+        public decimal Calc_n_O2_EG_m(decimal v_O2_EG_m, decimal MF_C_RG_m, decimal MF_N_RG_m, decimal F_O2_RG_m)
+        {
+            // Local Vars
+            decimal n_O2_EG_m = 0;
+
+            // Equation 12
+            n_O2_EG_m = (v_O2_EG_m / (1 - (v_O2_EG_m / Constants.v_O2_air))) * ((MF_C_RG_m / AtomicMass.C) + (MF_N_RG_m / (2 * AtomicMass.N)) + ((1 - Constants.v_O2_air) / Constants.v_O2_air) * F_O2_RG_m);
+
+            // Return
+            return n_O2_EG_m;
+        }
+
     }
 }
