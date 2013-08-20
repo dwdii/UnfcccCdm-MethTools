@@ -309,5 +309,23 @@ namespace CdmMethTools
             return n_O2_EG_m;
         }
 
+        /// <summary>
+        /// Equation 13: Calculates the stochiometric quantity of moles of O2 required for a complete oxidation of one kg residual gas in minute m (kmol/kg residual gas)
+        /// </summary>
+        /// <param name="MF_C_RG_m">Mass fraction of carbon in the residual gas in the minute m</param>
+        /// <param name="MF_H_RG_m">Mass fraction of hydrogen in the residual gas in the minute m</param>
+        /// <param name="MF_O_RG_m">Mass fraction of oxygen in the residual gas in the minute m</param>
+        /// <returns>Stochiometric quantity of moles of O2 required for a complete oxidation of one kg residual gas in minute m (kmol/kg residual gas)</returns>
+        public decimal Calc_F_O2_RG_m(decimal MF_C_RG_m, decimal MF_H_RG_m, decimal MF_O_RG_m)
+        {
+            // Local Vars
+            decimal F_O2_RG_m = 0;
+
+            // Equation 13
+            F_O2_RG_m = (MF_C_RG_m / AtomicMass.C) + (MF_H_RG_m / (4 * AtomicMass.H)) - (MF_O_RG_m / (2 * AtomicMass.O));
+
+            // Return
+            return F_O2_RG_m;
+        }
     }
 }
